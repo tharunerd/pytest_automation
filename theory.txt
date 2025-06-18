@@ -1,0 +1,66 @@
+Test discovery and naming conventions
+- Pytest automatically discovers test files and functions based on naming conventions.
+  - Test files should be named `test_*.py` or `*_test.py`.
+  - Test functions should be prefixed with `test_`.
+  - This allows pytest to identify and execute them during test runs.
+
+Assertions and test validations
+🧠 What is an Assertion?
+An assertion is a statement used in programming to check if something is true.
+If the condition is true, the program continues. If it's false, the program stops and throws an error.
+The keyword assert is used to make an assertion. It literally means:
+“I assert that this condition must be true.”
+If it's not true, Python will raise an AssertionError.- Pytest uses Python's built-in `assert` statement for test validations.
+  - Example: `assert add(2, 3) == 5`
+  - If the assertion fails, pytest provides detailed output showing the expected and actual values.
+
+Skipping tests and using markers
+- Tests can be skipped using the `@pytest.mark.skip` decorator.
+  - Example: `@pytest.mark.skip(reason="Not implemented yet")`
+- You can also conditionally skip tests using `@pytest.mark.skipif`.
+  - Example: `@pytest.mark.skipif(sys.version_info < (3, 8), reason="Requires Python 3.8+")`
+- Markers can also be used to group or categorize tests for selective execution.
+
+Parametrized (data-driven) testing
+- Pytest supports parameterized tests using the `@pytest.mark.parametrize` decorator.
+  - This allows you to run the same test with multiple sets of input data.
+  - Example:
+    ```python
+    @pytest.mark.parametrize("a, b, expected", [(2, 3, 5), (5, 5, 10), (0, 0, 0)])
+    def test_add(a, b, expected):
+        assert add(a, b) == expected
+    ```
+
+Fixtures (a key feature in Pytest)
+- Fixtures are used to set up and tear down test environments.
+  - They are defined using the `@pytest.fixture` decorator.
+  - Example:
+    ```python
+    @pytest.fixture
+    def sample_data():
+        return {"key": "value"}
+    def test_example(sample_data):
+        assert sample_data["key"] == "value"
+    ```
+- Fixtures can be reused across multiple tests and support dependency injection.
+
+Command-line options
+- Pytest provides several command-line options to customize test execution:
+  - `-v`: Verbose output.
+  - `-q`: Quiet mode.
+  - `--maxfail=N`: Stop after N test failures.
+  - `-k "expression"`: Run tests matching a specific expression.
+  - `-m "marker"`: Run tests with a specific marker.
+
+Pytest-BDD for behavior-driven development
+- Pytest-BDD is a plugin for behavior-driven development (BDD) using pytest.
+  - It allows you to write tests in Gherkin syntax (`Given`, `When`, `Then`).
+  - Example:
+    ```gherkin
+    Feature: Calculator
+      Scenario: Add two numbers
+        Given I have a calculator
+        When I add 2 and 3
+        Then the result should be 5
+    ```
+  - Pytest-BDD integrates these scenarios with Python test functions.
