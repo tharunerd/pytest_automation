@@ -21,11 +21,10 @@ This repository showcases a variety of testing techniques using the **pytest** f
 ```bash
 pip install -r requirements.txt
 ```
-
 ## ✅ Run Tests
 
 ```bash
 pytest
 ```
 
-image ()
+[📄 View Python Automation Testing with Pytest (PDF)](https://github.com/tharunerd/pytest_automation/blob/main/python_automation_testing_with_pytest.pdf)
